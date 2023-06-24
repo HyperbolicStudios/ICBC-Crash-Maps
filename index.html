@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>ICBC Crash Maps</title>
+  <meta charset="UTF-8" />
+  <script src="https://kit.fontawesome.com/895917e848.js" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+
+
+  <!-- HTML Meta Tags -->
+  <title>ICBC Crash Maps</title>
+  <meta name="description" content="Whare are the best places for apartments?">
+
+  <!-- Facebook Meta Tags -->
+  <meta property="og:url" content="https://homesforliving.github.io/OCP-Reform/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="OCP Reform">
+  <meta property="og:description" content="Whare are the best places for apartments?">
+  <meta property="og:image" content="https://user-images.githubusercontent.com/36494032/233565452-6071d5dc-d47c-4591-bcf5-443b80ed543f.png">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:domain" content="homesforliving.github.io">
+  <meta property="twitter:url" content="https://homesforliving.github.io/OCP-Reform/">
+  <meta name="twitter:title" content="OCP Reform">
+  <meta name="twitter:description" content="Whare are the best places for apartments?">
+  <meta name="twitter:image" content="https://user-images.githubusercontent.com/36494032/233565452-6071d5dc-d47c-4591-bcf5-443b80ed543f.png">
+
+  <!-- Meta Tags Generated via https://www.opengraph.xyz -->
+        
+        
+  <link rel="manifest" href="favicon/site.webmanifest">
+</head>
+
+
+<body>
+
+  <header id="topHeader" onclick="openNav()">
+    <div></div>
+    <h3>ICBC Crash Maps</h3>
+
+    <a href="#" onclick="return openNav()" class="align-right openButton">Menu &nbsp;&#9776;</a>
+    <div></div>
+  </header></a>
+
+  <nav id="menu">
+    <a href="# " onclick="closeNav()">
+      <h5 class="menu-text close" id="closeButton">&times;</h5>
+    </a>
+    <a href="/">
+      <h5 class="menu-text">Home</h5>
+    </a>
+    <a href="https://github.com/HyperbolicStudios/">
+      <h5 class="menu-text">Github</h5>
+    </a>
+   <div></div>
+
+  </nav>
+  <section class="divider">
+  </section>
+<!--- 
+  <section class="container" id="selection">
+
+    <label>Colour by: </label>
+    <button type="button" class="mode" aria-pressed="true" onclick="update(this)">Land Values</button>
+    <div> </div>
+    <button type="button" class="mode" aria-pressed="false" onclick="update(this)">Total Value</button>
+
+  </section> -->
+
+
+  <h1 id="chart_title">ICBC Crash Maps</h1>
+  <h2 id="chart_subtitle">Prettier and more interactive than what ICBC publishes</h2>
+
+  <iframe title="title" class="map" scrolling="no" seamless="seamless" src="Maps/Bubble Bike Crashes.html" height="700" width="90%"></iframe>
+  <div class="divider"></div>
+  <iframe title="title" class="map" scrolling="no" seamless="seamless" src="Maps/Heatmap Bike Crashes.html" height="700" width="90%"></iframe>
+
+  <iframe title="title" class="map" scrolling="no" seamless="seamless" src="Maps/Bubble Pedestrian Crashes.html" height="700" width="90%"></iframe>
+  
+  <iframe title="title" class="map" scrolling="no" seamless="seamless" src="Maps/Heatmap Pedestrian Crashes.html" height="700" width="90%"></iframe>
+  <section class="container">
+
+    <h3>Notes</h3>
+    <ul>
+      <li><p>This data is from <a href="https://public.tableau.com/app/profile/icbc">ICBC's tableau dashboard</a></p></li>
+      <li><p>All the data caveats they note apply here, except that I've gone ahead and removed duplicate data points that occur on the borders between municipalities</p></li>
+      <li><p>Data and script is on <a href="https://github.com/HyperbolicStudios/ICBC-Crash-Maps">my Github</a></p></li>
+      
+  </section>
+  <div class="divider"></div>
+  <footer id="footer">
+
+    <a title="My Github" href="https://github.com/HyperbolicStudios/"><i class="fa-brands fa-github fa-2xl"></i></a>
+
+  </footer>
+
+</body>
+
+<script src="js/script.js"></script>
+
+</html>
