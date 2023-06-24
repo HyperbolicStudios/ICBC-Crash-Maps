@@ -95,7 +95,9 @@ def map_data():
         fig = px.scatter_mapbox(df, lat='Latitude', lon='Longitude', 
                         size="Count",
                         mapbox_style="carto-positron",
-                        hover_data=['Count', 'Location', 'Municipality', 'Label']
+                        hover_data=['Count', 'Location', 'Municipality', 'Label'],
+                        color_discrete_sequence=['red'],
+                        opacity=0.65
                         )
         
         fig.update_traces(hovertemplate=hover_template)
