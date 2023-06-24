@@ -41,16 +41,36 @@ def collect_data():
 
         print(df)
 
-        df.to_csv("Cleaned " + filename + ".csv")
+        df.to_csv("Maps/Cleaned " + filename + ".csv")
     return
 
 def map_data():
     for filename in files:
         df = pd.read_csv("Cleaned " + filename + ".csv")
-
         df.dropna(inplace=True)
-        df['Location'] = df['Location'].str.title()
 
+        #set count to be int
+        df["Count"] = df["Count"].astype(int)
+
+        df["Label"] = None
+
+        def create_label(count):
+            if count == 1:
+                return "1 " + filename[:-2]
+            else:
+                return " {} {}".format(count, filename)
+        
+        df["Label"] = df["Count"].apply(create_label)
+
+        df['Location'] = df['Location'].str.title()
+        df['Municipality'] = df['Municipality'].str.title()
+
+        #create hover template showing location, count, and municipality
+        hover_template = """
+        <b>%{customdata[1]}</b><br>
+        %{customdata[2]}<br>
+        %{customdata[3]}"""
+        
         #HEATMAP
 
         fig = px.density_mapbox(df, lat='Latitude', lon='Longitude', z='Count', radius=10,
@@ -58,16 +78,9 @@ def map_data():
                                 #scale values = 25 is very bright, 0 is very dark
                                 range_color=(0, 15),
                                 #custom hover data
-                                hover_data={'Latitude': False, 'Longitude': False, 'Count': True, 'Location': True, 'Municipality': True}
+                                custom_data=['Count', 'Location', 'Municipality', 'Label']
+                        )
 
-        )
-        #create hover template showing location, count, and municipality
-        hover_template = """
-        <b>%{customdata[3]}</b><br>
-        %{customdata[2]} """ + filename + """<br>
-        %{customdata[4]}
-        """
-        
         fig.update_traces(hovertemplate=hover_template)
 
         fig.update_layout(title_text=filename + ", 2016-2020 (ICBC)",
@@ -75,14 +88,14 @@ def map_data():
                           mapbox_center={"lat": 49.2827, "lon": -123.1207},
                           mapbox_zoom=7)
         
-        fig.write_html("Heatmap " + filename + ".html")
+        fig.write_html("Maps/Heatmap " + filename + ".html")
 
         #BUBBLE PLOT
 
         fig = px.scatter_mapbox(df, lat='Latitude', lon='Longitude', 
                         size="Count",
-                          mapbox_style="carto-positron",
-                        hover_data={'Latitude': False, 'Longitude': False, 'Count': True, 'Location': True, 'Municipality': True}
+                        mapbox_style="carto-positron",
+                        hover_data=['Count', 'Location', 'Municipality', 'Label']
                         )
         
         fig.update_traces(hovertemplate=hover_template)
@@ -92,7 +105,7 @@ def map_data():
                         mapbox_center={"lat": 49.2827, "lon": -123.1207},
                         mapbox_zoom=7)
         
-        fig.write_html("Bubble " + filename + ".html")
+        fig.write_html("Maps/Bubble " + filename + ".html")
 
     return
 
