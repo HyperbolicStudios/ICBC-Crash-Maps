@@ -113,7 +113,6 @@ p>a {
   text-decoration: underline;
 }
 
-p>
 
 .container {
   margin: 2.5% 5% 2.5% 5%;
@@ -136,7 +135,7 @@ iframe {
   text-align: center;
 }
 
-#footer>p, a {
+#footer>p {
   color: white;
 }
 
