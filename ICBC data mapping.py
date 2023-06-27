@@ -86,8 +86,10 @@ def map_data():
         fig.update_layout(title_text=filename + ", 2016-2020 (ICBC)",
                           title_x=0.5,
                           mapbox_center={"lat": 49.2827, "lon": -123.1207},
-                          mapbox_zoom=7)
-        
+                          mapbox_zoom=7,
+                          margin={"r":0,"t":0,"l":0,"b":0})
+        #set margins to 0
+
         fig.write_html("Maps/Heatmap " + filename + ".html")
 
         #BUBBLE PLOT
@@ -105,7 +107,8 @@ def map_data():
         fig.update_layout(title_text=filename + ", 2016-2020 (ICBC)",
                         title_x=0.5,
                         mapbox_center={"lat": 49.2827, "lon": -123.1207},
-                        mapbox_zoom=7)
+                        mapbox_zoom=7,
+                        margin={"r":0,"t":0,"l":0,"b":0})
         
         fig.write_html("Maps/Bubble " + filename + ".html")
 
