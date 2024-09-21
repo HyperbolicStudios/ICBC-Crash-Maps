@@ -4,6 +4,8 @@ import plotly.express as px
 files = ["Pedestrian Crashes", "Bike Crashes"]
 
 def collect_data():
+    import os
+
     for filename in files:
         #open Map.csv with utf-16 encoding. tab seperated
         df = pd.read_csv(filename + ".csv", sep='\t', encoding='utf-16')
@@ -12,36 +14,15 @@ def collect_data():
         df = df[1:]
         df.columns = new_header
 
-        df['Longitude'] = None
-        df['Count'] = None
-
         #lat_columns are the columns not in [Latitude, Municipality, Location]
 
         long_columns = df.columns[~df.columns.isin(['Latitude', 'Municipality', 'Location'])]
 
-        #iterate through each row. Set the value of df.Longitude to the value of the column that is not null
-        for i in range(1, len(df)):
-            for col in long_columns:
-                #if not nan:
-                if pd.isna(df[col][i]) == False:
-                            #set df.Longitude to the value of the column that is not null
-                    #set it on a view, not a copy
-                    df.loc[i, 'Count'] = df[col][i]
-                    df.loc[i, 'Longitude'] = col
-                    print("Row {}/{}".format(i, len(df)))
-                    break
+        df = pd.melt(df, id_vars=['Latitude', 'Municipality', 'Location'], value_vars=long_columns, var_name='Longitude', value_name='Count')
+        df.dropna(subset=['Count'], inplace=True)
+        
+        df.to_csv("Cleaned " + filename + ".csv", index=False)
 
-        df = df[['Municipality', 'Location', 'Latitude', 'Longitude', 'Count']]
-
-        #icbc counts crashes that occur on the border between two munis twice, i.e. there are two rows for the same intersection
-        #keep only one row
-
-        #delete duplicates IF Location	Latitude	Longitude are all the same
-        df = df.drop_duplicates(subset=['Location', 'Latitude', 'Longitude'], keep='first')
-
-        print(df)
-
-        df.to_csv("Maps/Cleaned " + filename + ".csv")
     return
 
 def map_data():
@@ -114,6 +95,6 @@ def map_data():
 
     return
 
-#collect_data()
+collect_data()
 
 map_data()
