@@ -26,6 +26,7 @@ def collect_data():
     return
 
 def map_data():
+
     for filename in files:
         df = pd.read_csv("Cleaned " + filename + ".csv")
         df.dropna(inplace=True)
@@ -52,6 +53,8 @@ def map_data():
         %{customdata[2]}<br>
         %{customdata[3]}"""
         
+        config = {'scrollZoom': True}
+        
         #HEATMAP
 
         fig = px.density_mapbox(df, lat='Latitude', lon='Longitude', z='Count', radius=10,
@@ -71,7 +74,7 @@ def map_data():
                           margin={"r":0,"t":0,"l":0,"b":0})
         #set margins to 0
 
-        fig.write_html("Maps/Heatmap " + filename + ".html")
+        fig.write_html("Maps/Heatmap " + filename + ".html", config=config)
 
         #BUBBLE PLOT
 
@@ -91,10 +94,10 @@ def map_data():
                         mapbox_zoom=7,
                         margin={"r":0,"t":0,"l":0,"b":0})
         
-        fig.write_html("Maps/Bubble " + filename + ".html")
+        fig.write_html("Maps/Bubble " + filename + ".html", config=config)
 
     return
 
-collect_data()
+#collect_data()
 
 map_data()
