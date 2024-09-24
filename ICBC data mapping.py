@@ -1,7 +1,7 @@
 import pandas as pd
 import plotly.express as px
 
-files = ["Pedestrian Crashes", "Bike Crashes"]
+files = ["Pedestrian Crashes", "Bike Crashes", "All Crashes"]
 
 def collect_data():
     import os
@@ -98,6 +98,6 @@ def map_data():
 
     return
 
-#collect_data()
+collect_data()
 
 map_data()
